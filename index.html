@@ -16,17 +16,62 @@
 
 <body>
     <div id="app">
-        
+        <div class="container-fluid p-5">
+            <!-- CARD  -->
+            <div class="card" >
 
+                <!-- HEADER DELLA CARD  -->
+                <div class="card-header">
 
+                    <!-- TITOLO  -->
+                    <h2 class="card-title text-center p-2">Vue To Do List</h2>
+                    <!-- /TITOLO  -->
+                    <!-- INPUT TASK  -->
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control fs-3" placeholder="Inserisci task:" aria-label="Recipient's username" aria-describedby="button-addon2" v-model="elementName" :class="{ 'border border-danger':error }">
+                        <button class="btn btn-outline-secondary p-3" type="button" id="button-addon2" @click="createItem()" :class="{ 'border border-danger':error }">
+                            <i class="fa-solid fa-plus" :class="{ 'text-danger':error }"></i>
+                        </button>
+                    </div>
+                    <!-- /INPUT DOVE VERRA' SCRITTA LA TASK  -->
 
+                </div>
+                <!-- /CARD-HEADER  -->
 
+                <!-- CARD-BODY  -->
+                <div class="card-body">
 
+                    <!-- ELEMENTO DI TEMPLATE CHE VERRA' CREATO X VOLTE  -->
+                    <ul class="list-group" v-for="(toDo,index) in toDoList" v-if="toDoList.length > 0">
+                        <li class="list-group-item d-flex justify-content-between align-items-center" :class="{ 'bg-dark-subtle':toDo.done }">
 
+                            <!-- TESTO DELLA TASK  -->
+                            <div v-cloak class="fs-5" :class="{ 'text-decoration-line-through':toDo.done }">{{toDo.elementName}}</div>
+                            <!-- /TESTO DELLA TASK  -->
+                            <!-- OPZIONI DELLA TASK  -->
+                            <div v-cloak class="options">
+                                <i class="fa-solid fa-trash menuIcon" role="button" @click="deleteItem(index)"></i>
+                                <i class="fa-solid fa-delete-left menuIcon" role="button" v-if="toDo.done" @click="saveItem(index)"></i>
+                                <i class="fa-solid fa-check menuIcon" role="button" v-else @click="doneItem(index)"></i>
+                            </div>
+                            <!-- /OPZIONI DELLA TASK  -->
 
+                        </li>
+                    </ul>
+                    <!-- /ELEMENTO DI TEMPLATE CHE VERRA' CREATO X VOLTE  -->
 
+                    <!-- MESSAGGIO CHE VIENE MOSTRATO NEL CASO IN CUI LA LISTA SIA VUOTA  -->
+                    <div v-cloak class="alert alert-light h3" role="alert" v-else>
+                        Lista vuota!
+                    </div>
+                    <!-- /LISTA VUOTA  -->
+
+                </div>
+                <!-- /CARD BODY  -->
+            </div>
+            <!-- /CARD  -->
+        </div>
     </div>
-
 
 
 
